@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from './components/Home.vue'
 import Login from './components/Login.vue'
+import Home from './components/Home.vue'
+import JobPosting from './components/JobPosting.vue'
 import firebase from './plugins/firebase'
 
 function checkRouteOnlyLoggedIn(route) {
@@ -34,16 +35,22 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
+      path: '/login',
+      name: 'login',
+      component: Login,
+      meta: { onlyLoggedOut: true },
+    },
+    {
       path: '/',
       name: 'home',
       component: Home,
       meta: { onlyLoggedIn: true },
     },
     {
-      path: '/login',
-      name: 'login',
-      component: Login,
-      meta: { onlyLoggedOut: true },
+      path: '/job-posting',
+      name: 'jobPosting',
+      component: JobPosting,
+      meta: { onlyLoggedIn: true },
     },
     { path: '/:path(.*)', redirect: { name: 'home' } },
   ],
